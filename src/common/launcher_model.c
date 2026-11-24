@@ -529,6 +529,8 @@ void launcher_model_init(LauncherModel* m,
         m->has_sharp_filter     = game->has_sharp_filter != 0;
         m->has_affine_filter    = game->has_affine_filter != 0;
         m->has_frame_blend      = game->has_frame_blend != 0;
+        m->has_lcd_ghosting     = game->has_lcd_ghosting != 0;
+        m->has_lcd_grid         = game->has_lcd_grid != 0;
         m->has_run_ahead        = game->has_run_ahead != 0;
         m->has_shader           = game->has_shader != 0;
         m->netplay_supported    = game->netplay_supported != 0 && game->netplay != NULL;
@@ -617,6 +619,10 @@ void launcher_model_init(LauncherModel* m,
     }
     if (m->has_frame_blend)
         m->s.frame_blend = m->s.frame_blend ? 1 : 0;
+    if (m->has_lcd_ghosting)
+        m->s.lcd_ghosting = m->s.lcd_ghosting ? 1 : 0;
+    if (m->has_lcd_grid)
+        m->s.lcd_grid = m->s.lcd_grid ? 1 : 0;
     /* A host may seed a depth its build predates, or a negative from a
      * malformed config; clamp to what the control can actually show rather
      * than drawing a value no press can return to. */
@@ -1520,6 +1526,16 @@ void launcher_model_toggle_affine_filter(LauncherModel* m) {
 void launcher_model_toggle_frame_blend(LauncherModel* m) {
     if (!m || !m->has_frame_blend) return;
     m->s.frame_blend = !m->s.frame_blend;
+}
+
+void launcher_model_toggle_lcd_ghosting(LauncherModel* m) {
+    if (!m || !m->has_lcd_ghosting) return;
+    m->s.lcd_ghosting = !m->s.lcd_ghosting;
+}
+
+void launcher_model_toggle_lcd_grid(LauncherModel* m) {
+    if (!m || !m->has_lcd_grid) return;
+    m->s.lcd_grid = !m->s.lcd_grid;
 }
 
 void launcher_model_set_run_ahead(LauncherModel* m, int frames) {

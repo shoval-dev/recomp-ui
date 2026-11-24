@@ -428,8 +428,9 @@ snesrecomp `docs/RECOMP_NET.md` → "Soft-return rematch checklist".
   and an optional per-row **GAMEPAD** bind column (Genesis) alongside the key.
 - **Video** — window scale/size, renderer, supersampling, aspect (4:3/16:9/21:9),
   widescreen 16:9 with an optional "extra cells / side" stepper (Genesis),
-  texture filtering, antialiasing (Off/2×/4×/8×), screen model, frame
-  interpolation, and more — each shown only when the console exposes it.
+  texture filtering, antialiasing (Off/2×/4×/8×), screen model, LCD ghosting
+  and LCD grid for handheld panels, frame interpolation, and more — each
+  shown only when the console exposes it.
 - **Save** — SRAM Import/Clear (with `.bak` backup) or PS1 memory cards (per-slot
   enable, Browse / New-formats-a-blank-card, real block-usage grid via the host
   `memcard_inspect` callback).

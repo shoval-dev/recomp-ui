@@ -324,6 +324,8 @@ typedef struct {
     bool has_sharp_filter;
     bool has_affine_filter;
     bool has_frame_blend;
+    bool has_lcd_ghosting;     // LCD ghosting / pixel-grid checkboxes (handhelds)
+    bool has_lcd_grid;
     bool has_run_ahead;
     bool has_shader;
     bool netplay_supported;
@@ -757,6 +759,8 @@ void launcher_model_cycle_scaling_filter(LauncherModel* m);
 const char* launcher_model_scaling_filter_label(const LauncherModel* m);
 void launcher_model_toggle_affine_filter(LauncherModel* m);
 void launcher_model_toggle_frame_blend(LauncherModel* m);  // gated has_frame_blend
+void launcher_model_toggle_lcd_ghosting(LauncherModel* m);  // gated has_lcd_ghosting
+void launcher_model_toggle_lcd_grid(LauncherModel* m);      // gated has_lcd_grid
 // Run-ahead depth, 0 (Off) .. RECOMP_LAUNCHER_RUN_AHEAD_MAX. Off by default:
 // each frame of depth is a whole extra emulated frame plus a snapshot/restore,
 // so it is opt-in rather than a cost every host pays. Set, not cycled -- the

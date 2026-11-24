@@ -1349,6 +1349,18 @@ struct RecompLauncherCSettings {
     // Local display choice from GameInfo.netplay_view_labels. Persisted by
     // the host, separate from single-player aspect and match capabilities.
     int netplay_view_index;
+    /* ---- LCD presentation (GameInfo.has_lcd_ghosting / has_lcd_grid) -----
+     * Present-time effects of a handheld's own panel, independent of the
+     * screen model's colour grading above:
+     *   lcd_ghosting — each frame averaged with the previous one, as the
+     *                  panel's slow response showed it;
+     *   lcd_grid     — the panel's pixel structure on the scaled-up image.
+     * 0 = off, 1 = on. Stored plainly, like scanlines: "unset" and "off" are
+     * the same answer (every runtime ships them off), so a zero-initialized
+     * host predating these fields gets the default it would have picked.
+     * Appended additively. */
+    int  lcd_ghosting;
+    int  lcd_grid;
 };
 
 /* Largest run-ahead depth the launcher will offer for
@@ -2021,8 +2033,16 @@ typedef struct RecompLauncherCGameInfo {
     // is the native/default view; omit adaptive for games where it is unsafe.
     const char* const* netplay_view_labels;
     int num_netplay_view_labels;
+    /* Display settings checkboxes for a handheld's own present-time effects
+     * (Settings.lcd_ghosting / lcd_grid). Only meaningful for a console whose
+     * runtime implements them; everything else leaves these 0 and the rows
+     * are absent. Appended for ABI stability. */
+    int has_lcd_ghosting;
+    int has_lcd_grid;
 } RecompLauncherCGameInfo;
 #define RECOMP_LAUNCHER_HAS_NETPLAY_VIEW 1
+/* Hosts can #ifdef on this to stay source-compatible with older recomp-ui. */
+#define RECOMP_LAUNCHER_HAS_LCD_EFFECTS 1
 #define RECOMP_LAUNCHER_HAS_SNES_DISPLAY_ASPECT 1
 #define RECOMP_LAUNCHER_HAS_IN_SESSION 1
 

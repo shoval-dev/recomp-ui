@@ -4023,6 +4023,30 @@ void draw_display_controls(LauncherModel* m, const LauncherTheme& th) {
                               "2D art and menus are left alone.");
     }
 
+    // The handheld panel's own present-time effects. Independent of the
+    // Screen model colour grading right below: the two compose.
+    if (m->has_lcd_ghosting) {
+        row_label_right("LCD ghosting", th, cb);
+        bool ghost = m->s.lcd_ghosting != 0;
+        if (ImGui::Checkbox("##lcd_ghosting", &ghost))
+            launcher_model_toggle_lcd_ghosting(m);
+        if (ImGui::IsItemHovered(ImGuiHoveredFlags_DelayNormal))
+            ImGui::SetTooltip("Shows each frame blended with the one\n"
+                              "before it, as the screen's slow\n"
+                              "response did. Softens motion.");
+    }
+    if (m->has_lcd_grid) {
+        row_label_right("LCD grid", th, cb);
+        bool grid = m->s.lcd_grid != 0;
+        if (ImGui::Checkbox("##lcd_grid", &grid))
+            launcher_model_toggle_lcd_grid(m);
+        if (ImGui::IsItemHovered(ImGuiHoveredFlags_DelayNormal))
+            ImGui::SetTooltip("Shades each pixel of the original screen\n"
+                              "with a bright centre and darker edges.\n"
+                              "Needs a window at least three times the\n"
+                              "original size to show.");
+    }
+
     if (m->has_screen_kind) {
         row_label_right("Screen model", th, px(220));
         // Wide enough for the longest label ("Super Game Boy (No Border)");

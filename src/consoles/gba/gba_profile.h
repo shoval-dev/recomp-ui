@@ -58,9 +58,9 @@ static const char* const kPanelsSettingsGba[] = { "video", "audio", "system",
 
 // ---- screen-model vocabulary ----------------------------------------------------
 // Mirrors the gbarecomp runtime's screen filters (host_window GBARECOMP_SCREEN
-// / game.toml [video].screen: raw|unlit|frontlit|backlit|classic) by index.
+// / game.toml [video].screen: raw|unlit|frontlit|backlit|classic|agb) by index.
 static const char* const kGbaScreenKindNames[] = {
-    "Raw", "Unlit", "Frontlit", "Backlit", "Classic"
+    "Raw", "Unlit", "Frontlit", "Backlit", "Classic", "Color corrected"
 };
 #define LNG_GBA_SCREEN_KIND_COUNT \
     ((int)(sizeof(kGbaScreenKindNames) / sizeof(kGbaScreenKindNames[0])))
